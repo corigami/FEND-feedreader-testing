@@ -1,4 +1,4 @@
-# FEND-feedreeder-testing
+# FEND-feedreader-testing
 Project 5 for Udacity Frontend Nanodegree program
 =================================================
 This project shows testing being performed using the Jasmine Test Framework.  It also show cases Test Driven Development by writing some test cases before implementation. Tests can be found in the '/jasmine/spec' folder. 
