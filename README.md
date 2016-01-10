@@ -15,8 +15,9 @@ a) RSS Feeds - Tests that feeds are defined, named and that they have proper url
 
 b) The Menu -  Checks that Menu opens and closes properly and that it is hidden by default
 
-c) Initial Entries - Tests to see that RSS feeds load asyncronously and that the display changes when a user selects a different feed.
+c) Initial Entries - Tests that the feed reader loads entries properly.
 
+d) New Feed Selection - Tests to see that RSS feeds load asyncronously and that the display changes when a user selects a different feed.
     
 3 - Future Capabily 
 ---------------------------------
