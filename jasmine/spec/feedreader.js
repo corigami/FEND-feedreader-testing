@@ -10,7 +10,7 @@
  * to ensure they don't run until the DOM is ready.
  */
 $(function () {
-    
+
     /* Test Suite: 'RSS Feeds' - is all about the RSS
      * feeds definitions, the allFeeds variable in our application.
      */
@@ -52,7 +52,7 @@ $(function () {
 
     /* Test Suite: 'The Menu' - is a collection of specs that tests the menu functionality.
      */
-    describe('The Menu', function () {       
+    describe('The Menu', function () {
 
         /* Spec:is hidden by default' - ensures the menu element is
          * hidden by default.
@@ -60,7 +60,7 @@ $(function () {
         it('hides by default', function () {
             expect($('body').attr("class")).toMatch('menu-hidden');
         });
-      
+
 
         /* Spec:'toggles visibility when menu-icon is clicked', both on and off.
          */
@@ -76,16 +76,16 @@ $(function () {
     });
 
     /* Test Suite: 'Initial Entries' - Ensures the feed reader loads properly.
-    */
-    describe('Initial Entries', function () {       
+     */
+    describe('Initial Entries', function () {
 
         /* Call the loadFeed() function, giving it the first feed
          */
         beforeEach(function (done) {
             loadFeed(0, done);
         });
-        
-        
+
+
         /* Spec:'are loaded', - counts the number of entrys in the feed container and
          * and fails if it is not greater than zero.
          */
@@ -107,11 +107,15 @@ $(function () {
         beforeAll(function (done) {
             loadFeed(0, done);
         });
-        
+
         //get current header title and load new one
         beforeAll(function (done) {
             originalHref = $('.feed').children('a').eq(1).attr("href");
             loadFeed(1, done);
+        });
+
+        afterAll(function () {
+            loadFeed(0);
         });
 
         /* Spec:'changes when new feed loaded', - compares first href in original feed to
@@ -124,7 +128,47 @@ $(function () {
             expect(newHref).not.toMatch(originalHref);
             done();
         });
-        
+
     });
 
-} ());
+
+    /* Test Suite: 'Modify Feeds' -  Tests for functions that have yet to be implemented.
+     */
+    describe('Modify Feeds', function () {
+        var myFeed = {
+            name: 'New Feed',
+            url: 'http://www.website.com'
+        };
+        var numFeeds = allFeeds.length;
+        var tempFeedIndex;
+
+        /* Spec:'should be able to add a feed', - adds a feed using the defined function,
+         * then compares the length of the allFeeds array
+         */
+        it('should be able to add a feed', function (done) {
+            addFeed(myFeed);
+            expect(numFeeds).toBeLessThan(allFeeds.length);
+            tempFeedIndex = allFeeds.length - 1;
+        });
+
+        /* Spec:'should be able to get a feed', - first checks to see if it is defined,
+         * then compares to feed that was orginally added to make sure it is the correct
+         * feed.
+         */
+        it('should be able to get a feed', function (done) {
+            expect(getFeed(tempFeedIndex).toBeDefined());
+            expect(getFeed(tempFeedIndex).toMatch(myFeed));
+        });
+
+        /* Spec:'should be able to delete a feed', - first deletes the feed at the give index
+         * then checks to see that index is no longer defined.
+         */
+
+        it('should be able to delete a feed', function (done) {
+            deleteFeed(tempFeedIndex);
+            expect(getFeed(tempFeedIndex).not.toBeDefined());
+        });
+
+    });
+
+}());
